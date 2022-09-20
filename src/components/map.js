@@ -3,7 +3,9 @@ import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { Button, Container, Stack } from "react-bootstrap";
 import { supabase } from "../lib/api";
 import mapStyles from "../styles/mapStyles";
-
+/**
+ * Add Custom Styles to Map
+ */
 const mapContainerStyle = {
   height: "100vh",
   width: "100vw",
@@ -13,6 +15,9 @@ const options = {
   disableDefaultUI: true,
   zoomControl: true,
 };
+/**
+ * Center the Map on NW Ohio
+ */
 const center = {
   lat: 41.652805,
   lng: -83.5378652,
@@ -22,11 +27,15 @@ const MapView = ({ isLoaded, loadError, mapRef }) => {
   const [markers, setMarkers] = useState([]);
   const [mapSelected, setMapSelected] = useState(null);
   const [pinSelected, setPinSelected] = useState(null);
-
+  /**
+   * Call FetchMarkers when component first loads
+   */
   useEffect(() => {
     fetchMarkers();
   }, []);
-
+  /**
+   * Add Marker to Supabase DB and update markers state
+   */
   const addMarker = async (e) => {
     try {
       let { error, data } = await supabase
@@ -45,7 +54,9 @@ const MapView = ({ isLoaded, loadError, mapRef }) => {
       console.log("error", error);
     }
   };
-
+  /**
+   * Fetch Markers from Supabase and update state
+   */
   const fetchMarkers = async () => {
     let { error, data } = await supabase.from("places").select().order("id");
     if (error) {
@@ -54,7 +65,9 @@ const MapView = ({ isLoaded, loadError, mapRef }) => {
     }
     setMarkers(data);
   };
-
+  /**
+   * Event Handlers
+   */
   const onMapClick = useCallback((e) => {
     setMapSelected(e.latLng);
   }, []);
@@ -68,6 +81,9 @@ const MapView = ({ isLoaded, loadError, mapRef }) => {
     mapRef.current = map;
   }, []);
 
+  /**
+   * Return JSX
+   */
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
@@ -102,8 +118,7 @@ const MapView = ({ isLoaded, loadError, mapRef }) => {
             }
           />
         ))}
-
-        {mapSelected ? (
+        {mapSelected && (
           <InfoWindow
             position={{ lat: mapSelected.lat(), lng: mapSelected.lng() }}
             onCloseClick={() => {
@@ -120,8 +135,8 @@ const MapView = ({ isLoaded, loadError, mapRef }) => {
               </Container>
             </div>
           </InfoWindow>
-        ) : null}
-        {pinSelected ? (
+        )}
+        {pinSelected && (
           <InfoWindow
             position={{ lat: pinSelected.lat, lng: pinSelected.lng }}
             onCloseClick={() => {
@@ -133,7 +148,7 @@ const MapView = ({ isLoaded, loadError, mapRef }) => {
               <p>Created: {pinSelected.created_at}</p>
             </div>
           </InfoWindow>
-        ) : null}
+        )}
       </GoogleMap>
     </div>
   );

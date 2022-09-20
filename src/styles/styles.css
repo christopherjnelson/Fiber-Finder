@@ -6,12 +6,3 @@
     padding: 0;
     width: 100%;
 }
-
-.search {
-    position: absolute;
-    top: 1rem;
-    right:2rem;
-    z-index: 12;
-    margin: 0;
-    padding: 0;
-}
