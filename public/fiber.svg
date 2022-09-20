@@ -1,0 +1,5 @@
+<?xml version="1.0" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900">
+<path style="fill:#01539b; stroke:none;" d="M0 0L0 900L896 900L896.004 518L899.911 478L900 427L896.004 382L896 0L0 0z"/>
+<path style="fill:#ffffff; stroke:none;" d="M896 0L896.004 383L899 419L900 419L900 0L896 0M899 481L896.004 517L896 900L900 900L900 603L900 518C900 507.366 903.108 490.789 899 481z"/>
+</svg>

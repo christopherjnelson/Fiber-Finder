@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRef } from "react";
+import NavBar from "./components/navbar";
+import MapView from "./components/map";
+import { useLoadScript } from "@react-google-maps/api";
 
-function App() {
+const libraries = ["places"];
+
+const App = () => {
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: "AIzaSyCFAz90pyBmuPoviIAu84HZYRr4u0DT5OU",
+    libraries,
+  });
+
+  const mapRef = useRef();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBar isLoaded={isLoaded} loadError={loadError} mapRef={mapRef} />
+      <MapView isLoaded={isLoaded} loadError={loadError} mapRef={mapRef} />
+    </>
   );
-}
+};
 
 export default App;
