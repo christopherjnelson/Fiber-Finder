@@ -3,6 +3,7 @@ import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { Button, Container, Stack } from "react-bootstrap";
 import { supabase } from "../lib/api";
 import mapStyles from "../styles/mapStyles";
+import { formatRelative, parseISO } from "date-fns";
 /**
  * Add Custom Styles to Map
  */
@@ -77,7 +78,6 @@ const MapView = ({ isLoaded, loadError, mapRef }) => {
   }, []);
 
   const onMapLoad = useCallback((map) => {
-    console.log("set current ref");
     mapRef.current = map;
   }, []);
 
@@ -144,8 +144,13 @@ const MapView = ({ isLoaded, loadError, mapRef }) => {
             }}
           >
             <div>
-              <h2>{pinSelected.isp}</h2>
-              <p>Created: {pinSelected.created_at}</p>
+              {pinSelected.isp} Fiber Found!
+              <br />
+              <br />
+              <p>
+                Updated{" "}
+                {formatRelative(parseISO(pinSelected.created_at), new Date())}
+              </p>
             </div>
           </InfoWindow>
         )}

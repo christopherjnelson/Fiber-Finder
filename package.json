@@ -6,13 +6,12 @@
     "@react-google-maps/api": "^2.12.2",
     "@supabase/supabase-js": "^1.35.6",
     "bootstrap": "^5.2.1",
+    "date-fns": "^2.29.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
-    "react-bootstrap-typeahead": "^6.0.0",
     "react-dom": "^18.2.0",
     "react-google-places-autocomplete": "^3.4.0",
-    "react-scripts": "5.0.1",
-    "react-widgets": "^5.8.4"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
